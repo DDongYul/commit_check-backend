@@ -13,18 +13,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKER_HUB_USERNAME }}
-          password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+      # - name: Log in to Docker Hub
+      #   uses: docker/login-action@v2
+      #   with:
+      #     username: ${{ secrets.DOCKER_HUB_USERNAME }}
+      #     password: ${{ secrets.DOCKER_HUB_PASSWORD }}
 
       - name: Build Docker image and Push
         run: |
-          docker login -u ${{ secrets.USERNAME }} -p ${{ secrets.PASSWORD }}
+          docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} -p ${{ secrets.DOCKER_HUB_PASSWORD }}
           docker build --platform linux/amd64 -t node-example .
-          docker tag node-example ddongyul/node-example:${GITHUB_SHA::7}
-          docker push ddongyul/node-example:${GITHUB_SHA::7}
+          docker tag node-example rheech22/node-example:${GITHUB_SHA::7}
+          docker push rheech22/node-example:${GITHUB_SHA::7}
 
   backend-docker-pull-and-run:
     runs-on: self-hosted
