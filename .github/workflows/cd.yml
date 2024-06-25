@@ -20,13 +20,11 @@ jobs:
           password: ${{ secrets.DOCKER_HUB_PASSWORD }}
 
       - name: Build Docker image and Push
-        uses: docker/build-push-action@v4
-        with:
-          context: .
-          file: ./Dockerfile-dev
-          push: true
-          platforms: linux/arm64
-          tags: ${{ env.DOCKER_HUB_REPOSITORY }}:${GITHUB_SHA::7}
+        run: |
+          docker login -u ${{ secrets.USERNAME }} -p ${{ secrets.PASSWORD }}
+          docker build --platform linux/amd64 -t node-example .
+          docker tag node-example ddongyul/node-example:${GITHUB_SHA::7}
+          docker push ddongyul/node-example:${GITHUB_SHA::7}
 
   backend-docker-pull-and-run:
     runs-on: self-hosted
