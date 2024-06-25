@@ -23,8 +23,8 @@ jobs:
         run: |
           docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} -p ${{ secrets.DOCKER_HUB_PASSWORD }}
           docker build --platform linux/amd64 -t node-example .
-          docker tag node-example rheech22/node-example:${GITHUB_SHA::7}
-          docker push rheech22/node-example:${GITHUB_SHA::7}
+          docker tag node-example ddongyul/node-example:${GITHUB_SHA::7}
+          docker push ddongyul/node-example:${GITHUB_SHA::7}
 
   backend-docker-pull-and-run:
     runs-on: self-hosted
