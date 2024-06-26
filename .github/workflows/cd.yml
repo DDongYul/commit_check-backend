@@ -20,10 +20,10 @@ jobs:
           docker tag node-example ddongyul/node-example:${GITHUB_SHA::7}
           docker push ddongyul/node-example:${GITHUB_SHA::7}
 
-  # backend-docker-pull-and-run:
-  #   runs-on: self-hosted
-  #   if: ${{ needs.backend-docker-build-and-push.result == 'success' }}
-  #   needs: [ backend-docker-build-and-push ]
-  #   steps:
-  #     - name: Deploy application
-  #       run: ./deploy.sh ${{ github.sha }}
+  backend-docker-pull-and-run:
+    runs-on: self-hosted
+    if: ${{ needs.backend-docker-build-and-push.result == 'success' }}
+    needs: [ backend-docker-build-and-push ]
+    steps:
+      - name: Deploy application
+        run: ./deploy.sh ${{ github.sha }}
