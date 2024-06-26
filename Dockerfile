@@ -4,4 +4,4 @@ COPY . .
 
 RUN npm install
 
-CMD ["node", "app"]
+CMD ["ts-node", "src/server.ts"]
