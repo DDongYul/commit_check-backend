@@ -26,4 +26,4 @@ jobs:
     needs: [ backend-docker-build-and-push ]
     steps:
       - name: Deploy application
-        run: ./deploy.sh ${{ github.sha }}
+        run: ./deploy.sh ${{GITHUB_SHA::7}}
