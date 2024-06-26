@@ -26,4 +26,5 @@ jobs:
     needs: [ backend-docker-build-and-push ]
     steps:
       - name: Deploy application
-        run: ./deploy.sh
+        run: |
+          sh /home/ubuntu/deploy.sh
